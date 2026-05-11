@@ -20,18 +20,34 @@
 # production
 /build
 
-# misc
-.DS_Store
-*.pem
+# IDE - WebStorm / JetBrains
+.idea/
+*.iws
+*.iml
+*.ipr
 
-# debug
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# misc
+*.pem
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel

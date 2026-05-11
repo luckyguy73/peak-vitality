@@ -1,26 +1,23 @@
 @import "tailwindcss";
 
+/* Force the body to be dark regardless of anything else */
+body {
+  background-color: #0a0a0a !important;
+  color: #ededed;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Define our variables for Tailwind usage later */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #3b82f6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-accent: var(--accent);
 }
