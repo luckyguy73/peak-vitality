@@ -8,13 +8,18 @@ import {
 } from 'date-fns';
 
 /**
- * Generates an array of days to fill a 7x6 month grid.
- * This includes "padding" days from the previous and next months.
+ * STANDARD MODE: Generates a 7x6 month grid (with padding)
  */
 export const getMonthGrid = (date: Date) => {
     const start = startOfWeek(startOfMonth(date));
     const end = endOfWeek(endOfMonth(date));
+    return eachDayOfInterval({ start, end });
+};
 
+/**
+ * PROGRAM MODE: Generates only the days between two dates
+ */
+export const getProgramInterval = (start: Date, end: Date) => {
     return eachDayOfInterval({ start, end });
 };
 

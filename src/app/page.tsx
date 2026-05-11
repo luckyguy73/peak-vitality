@@ -1,31 +1,29 @@
 "use client";
 import { useState } from 'react';
-import { MonthView } from '@/components/calendar/MonthView';
-import { formatMonth } from '@/lib/calendar-utils';
+import { Sidebar } from '@/components/layout/Sidebar';
+import { Header } from '@/components/layout/Header';
+import { ContentShell } from '@/components/layout/ContentShell';
 
 export default function Home() {
-    const [viewDate, setViewDate] = useState(new Date());
+    const [activeTab, setActiveTab] = useState('dashboard');
+    const [viewDate] = useState(new Date());
 
     return (
-        <div className="min-h-screen flex flex-col">
-            <header className="border-b border-white/10 py-6 px-8">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <h1 className="text-2xl font-bold tracking-tight text-white">
-                        Peak<span className="text-accent">Vitality</span>
-                    </h1>
-                    <h2 className="text-lg font-medium text-slate-300">
-                        {formatMonth(viewDate)}
-                    </h2>
-                    <div className="flex gap-2">
-                        {/* We'll add Navigation buttons here next */}
-                        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10" />
-                    </div>
-                </div>
-            </header>
+        <div className="flex h-screen bg-background overflow-hidden">
+            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-            <main className="flex-1 max-w-7xl mx-auto w-full p-8">
-                <MonthView currentDate={viewDate} />
-            </main>
+            <div className="flex-1 flex flex-col overflow-hidden">
+                <Header
+                    title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+                    subtitle="Precision Health"
+                />
+
+                <main className="flex-1 overflow-y-auto p-8">
+                    <div className="max-w-7xl mx-auto">
+                        <ContentShell activeTab={activeTab} viewDate={viewDate} />
+                    </div>
+                </main>
+            </div>
         </div>
     );
 }
