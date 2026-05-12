@@ -1,4 +1,5 @@
 "use client";
+
 import {DashboardHome} from '@/components/dashboard/DashboardHome';
 import {MonthView} from '@/components/calendar/MonthView';
 

@@ -1,4 +1,5 @@
 "use client";
+
 import {Zap} from "lucide-react";
 
 export const DashboardHome = () => {

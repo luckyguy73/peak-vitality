@@ -1,4 +1,5 @@
 "use client";
+
 import {Calendar, LayoutDashboard, ListChecks, Settings} from "lucide-react";
 
 interface SidebarProps {
