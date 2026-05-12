@@ -1,5 +1,5 @@
 "use client";
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {supabase} from '@/lib/supabase';
 import {format} from 'date-fns';
 
@@ -7,22 +7,23 @@ export const useNotes = () => {
     const [notes, setNotes] = useState<Record<string, string>>({});
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchNotes = async () => {
-        try {
-            const { data, error } = await supabase.from('notes').select('date, content');
-            if (error) throw error;
-
-            const notesMap = data.reduce((acc: Record<string, string>, note: any) => {
-                acc[note.date] = note.content;
-                return acc;
-            }, {});
-            setNotes(notesMap);
-        } catch (err) {
-            console.error('Error fetching notes:', err);
-        } finally {
-            setIsLoading(false);
+    const fetchNotes = useCallback(async (showLoading = true) => {
+        if (showLoading) setIsLoading(true);
+        const { data, error } = await supabase.from('notes').select('date, content');
+        
+        if (error) {
+            console.error('Error fetching notes:', error);
+            if (showLoading) setIsLoading(false);
+            return;
         }
-    };
+
+        const notesMap = (data || []).reduce((acc: Record<string, string>, note: { date: string; content: string }) => {
+            acc[note.date] = note.content;
+            return acc;
+        }, {});
+        setNotes(notesMap);
+        if (showLoading) setIsLoading(false);
+    }, []);
 
     const saveNote = async (date: Date, content: string) => {
         const dateKey = format(date, 'yyyy-MM-dd');
@@ -30,19 +31,44 @@ export const useNotes = () => {
         // Optimistic Update
         setNotes(prev => ({ ...prev, [dateKey]: content }));
 
-        try {
-            const { error } = await supabase
-                .from('notes')
-                .upsert({ date: dateKey, content }, { onConflict: 'date' });
-            if (error) throw error;
-        } catch (err) {
-            console.error('Error saving note:', err);
-            fetchNotes(); // Rollback on error
+        const { error } = await supabase
+            .from('notes')
+            .upsert({ date: dateKey, content }, { onConflict: 'date' });
+        
+        if (error) {
+            console.error('Error saving note:', error);
+            await fetchNotes(false); // Rollback on error without triggering loading state
         }
     };
 
     useEffect(() => {
-        fetchNotes();
+        let isMounted = true;
+
+        const loadNotes = async () => {
+            const { data, error } = await supabase.from('notes').select('date, content');
+
+            if (!isMounted) return;
+
+            if (error) {
+                console.error('Error fetching notes:', error);
+                setIsLoading(false);
+                return;
+            }
+
+            const notesMap = (data || []).reduce((acc: Record<string, string>, note: { date: string; content: string }) => {
+                acc[note.date] = note.content;
+                return acc;
+            }, {});
+
+            setNotes(notesMap);
+            setIsLoading(false);
+        };
+
+        void loadNotes();
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return { notes, saveNote, isLoading };
