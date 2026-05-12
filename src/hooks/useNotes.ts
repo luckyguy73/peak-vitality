@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
-import { format } from 'date-fns';
+import {useEffect, useState} from 'react';
+import {supabase} from '@/lib/supabase';
+import {format} from 'date-fns';
 
 export const useNotes = () => {
     const [notes, setNotes] = useState<Record<string, string>>({});

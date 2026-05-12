@@ -1,5 +1,5 @@
 "use client";
-import { LayoutDashboard, Calendar, ListChecks, Settings } from "lucide-react";
+import {Calendar, LayoutDashboard, ListChecks, Settings} from "lucide-react";
 
 interface SidebarProps {
     activeTab: string;

@@ -1,7 +1,7 @@
 "use client";
-import { useState } from 'react';
-import { format, setMonth, setYear, getYear } from 'date-fns';
-import { X, ChevronUp, ChevronDown } from 'lucide-react';
+import {useState} from 'react';
+import {format, getYear, setMonth, setYear} from 'date-fns';
+import {ChevronDown, ChevronUp, X} from 'lucide-react';
 
 interface DateSelectorProps {
     currentDate: Date;
@@ -17,7 +17,7 @@ export const DateSelector = ({ currentDate, onSelect, onClose }: DateSelectorPro
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-md p-4 transition-all">
-            <div className="bg-zinc-900/80 border border-white/10 w-full max-w-lg rounded-[32px] p-8 shadow-2xl animate-in zoom-in duration-200">
+            <div className="bg-zinc-900/80 border border-white/10 w-full max-w-lg rounded-4xl p-8 shadow-2xl animate-in zoom-in duration-200">
                 <div className="flex justify-between items-center mb-10">
                     <h3 className="text-xl font-bold text-white tracking-tight">Select Date</h3>
                     <button onClick={onClose} className="p-2 text-slate-400 hover:text-white transition-colors">
@@ -45,7 +45,7 @@ export const DateSelector = ({ currentDate, onSelect, onClose }: DateSelectorPro
                         })}
                     </div>
 
-                    <div className="w-[1px] bg-white/10 my-2" />
+                    <div className="w-px bg-white/10 my-2" />
 
                     <div className="flex flex-col items-center justify-center gap-1 px-4">
                         <button

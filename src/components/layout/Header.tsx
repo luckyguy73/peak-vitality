@@ -23,7 +23,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
                     <div className="text-right hidden sm:block">
                         <p className="text-xs font-medium text-white">{title}</p>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-accent/20 to-accent border border-white/10" />
+                    <div className="w-8 h-8 rounded-full bg-linear-to-tr from-accent/20 to-accent border border-white/10" />
                 </div>
             </div>
         </header>

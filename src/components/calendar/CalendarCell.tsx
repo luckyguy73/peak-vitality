@@ -1,5 +1,5 @@
 "use client";
-import { format, isSameMonth, isToday } from 'date-fns';
+import {format, isSameMonth, isToday} from 'date-fns';
 
 interface CalendarCellProps {
     day: Date;

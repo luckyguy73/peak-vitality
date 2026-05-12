@@ -1,12 +1,12 @@
 "use client";
-import { useState } from 'react';
-import { getMonthGrid } from '@/lib/calendar-utils';
-import { format } from 'date-fns';
-import { DateSelector } from './DateSelector';
-import { DayModal } from './DayModal';
-import { CalendarHeader } from './CalendarHeader';
-import { CalendarCell } from './CalendarCell';
-import { useNotes } from '@/hooks/useNotes';
+import {useState} from 'react';
+import {getMonthGrid} from '@/lib/calendar-utils';
+import {format} from 'date-fns';
+import {DateSelector} from './DateSelector';
+import {DayModal} from './DayModal';
+import {CalendarHeader} from './CalendarHeader';
+import {CalendarCell} from './CalendarCell';
+import {useNotes} from '@/hooks/useNotes';
 
 interface MonthViewProps {
     currentDate: Date;

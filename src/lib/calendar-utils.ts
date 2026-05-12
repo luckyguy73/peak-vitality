@@ -1,11 +1,4 @@
-import {
-    startOfMonth,
-    endOfMonth,
-    startOfWeek,
-    endOfWeek,
-    eachDayOfInterval,
-    format
-} from 'date-fns';
+import {eachDayOfInterval, endOfMonth, endOfWeek, format, startOfMonth, startOfWeek} from 'date-fns';
 
 /**
  * STANDARD MODE: Generates a 7x6 month grid (with padding)

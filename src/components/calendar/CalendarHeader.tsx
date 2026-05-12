@@ -1,6 +1,6 @@
 "use client";
-import { format, addMonths, subMonths } from 'date-fns';
-import { ChevronLeft, ChevronRight, CalendarDays } from 'lucide-react';
+import {addMonths, format, subMonths} from 'date-fns';
+import {CalendarDays, ChevronLeft, ChevronRight} from 'lucide-react';
 
 interface CalendarHeaderProps {
     currentDate: Date;

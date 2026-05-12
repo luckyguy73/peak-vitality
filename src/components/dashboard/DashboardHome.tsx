@@ -1,5 +1,5 @@
 "use client";
-import { Zap } from "lucide-react";
+import {Zap} from "lucide-react";
 
 export const DashboardHome = () => {
     return (

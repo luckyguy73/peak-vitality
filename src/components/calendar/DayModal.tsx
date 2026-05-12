@@ -1,7 +1,7 @@
 "use client";
-import { X } from "lucide-react";
-import { format } from "date-fns";
-import { useState, useEffect } from "react";
+import {X} from "lucide-react";
+import {format} from "date-fns";
+import {useState} from "react";
 
 interface DayModalProps {
     date: Date;
@@ -15,7 +15,7 @@ export const DayModal = ({ date, onClose, initialNote, onSave }: DayModalProps) 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md p-4">
-            <div className="bg-zinc-900 border border-white/10 w-full max-w-md rounded-[32px] p-8 shadow-2xl animate-in zoom-in duration-200">
+            <div className="bg-zinc-900 border border-white/10 w-full max-w-md rounded-4xl p-8 shadow-2xl animate-in zoom-in duration-200">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h3 className="text-xl font-bold text-white tracking-tight">
