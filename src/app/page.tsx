@@ -21,7 +21,7 @@ export default function Home() {
                     subtitle="Precision Health"
                 />
 
-                <main className="flex-1 overflow-y-auto p-8">
+                <main className="flex-1 overflow-y-auto">
                     <div className="max-w-7xl mx-auto">
                         <ContentShell
                             activeTab={activeTab}
