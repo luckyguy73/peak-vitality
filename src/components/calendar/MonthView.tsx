@@ -1,24 +1,23 @@
 "use client";
 
-import {useState} from 'react';
-import {getMonthGrid} from '@/lib/calendar-utils';
-import {format} from 'date-fns';
-import {DateSelector} from './DateSelector';
-import {DayModal} from './DayModal';
-import {CalendarHeader} from './CalendarHeader';
-import {CalendarCell} from './CalendarCell';
-import {useNotes} from '@/hooks/useNotes';
+import { useState } from 'react';
+import { getMonthGrid } from '@/lib/calendar-utils';
+import { format } from 'date-fns';
+import { DateSelector } from './DateSelector';
+import { DayModal } from './DayModal';
+import { CalendarHeader } from './CalendarHeader';
+import { CalendarCell } from './CalendarCell';
 
 interface MonthViewProps {
     currentDate: Date;
     setCurrentDate: (date: Date) => void;
+    notes: Record<string, string>;
+    saveNote: (date: Date, content: string) => Promise<void>;
 }
 
-export const MonthView = ({ currentDate, setCurrentDate }: MonthViewProps) => {
-    const { notes, saveNote } = useNotes();
+export const MonthView = ({ currentDate, setCurrentDate, notes, saveNote }: MonthViewProps) => {
     const [isSelectorOpen, setIsSelectorOpen] = useState(false);
     const [selectedDay, setSelectedDay] = useState<Date | null>(null);
-
     const days = getMonthGrid(currentDate);
     const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -27,7 +26,10 @@ export const MonthView = ({ currentDate, setCurrentDate }: MonthViewProps) => {
             {isSelectorOpen && (
                 <DateSelector
                     currentDate={currentDate}
-                    onSelect={(newDate) => { setCurrentDate(newDate); setIsSelectorOpen(false); }}
+                    onSelect={(newDate) => {
+                        setCurrentDate(newDate);
+                        setIsSelectorOpen(false);
+                    }}
                     onClose={() => setIsSelectorOpen(false)}
                 />
             )}
@@ -49,7 +51,9 @@ export const MonthView = ({ currentDate, setCurrentDate }: MonthViewProps) => {
 
             <div className="grid grid-cols-7 border-b border-white/5 bg-white/2">
                 {weekDays.map((day) => (
-                    <div key={day} className="py-3 text-center font-bold text-slate-500 uppercase tracking-widest">{day}</div>
+                    <div key={day} className="py-3 text-center font-bold text-slate-500 uppercase tracking-widest text-[10px]">
+                        {day}
+                    </div>
                 ))}
             </div>
 

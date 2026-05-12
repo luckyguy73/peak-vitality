@@ -7,9 +7,11 @@ interface ContentShellProps {
     activeTab: string;
     viewDate: Date;
     setViewDate: (date: Date) => void;
+    notes: Record<string, string>;
+    saveNote: (date: Date, content: string) => Promise<void>;
 }
 
-export const ContentShell = ({ activeTab, viewDate, setViewDate }: ContentShellProps) => {
+export const ContentShell = ({ activeTab, viewDate, setViewDate, notes, saveNote }: ContentShellProps) => {
     switch (activeTab) {
         case 'dashboard':
             return <DashboardHome />;
@@ -19,6 +21,8 @@ export const ContentShell = ({ activeTab, viewDate, setViewDate }: ContentShellP
                 <MonthView
                     currentDate={viewDate}
                     setCurrentDate={setViewDate}
+                    notes={notes}
+                    saveNote={saveNote}
                 />
             );
 
